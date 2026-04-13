@@ -43,8 +43,14 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import android.content.Intent
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.ui.res.stringResource
+import com.kuwaitdevs.cybersecurityzenkoans.BuildConfig
 import com.kuwaitdevs.cybersecurityzenkoans.R
 import androidx.core.net.toUri
 
@@ -55,7 +61,8 @@ fun ZenKoanApp(
     modifier: Modifier,
     koanWithExplanation: KoanWithExplanation?,
     showAnimation: Boolean,
-    showShakeMessage: Boolean
+    showShakeMessage: Boolean,
+    onShake: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val view = LocalView.current
@@ -140,6 +147,28 @@ fun ZenKoanApp(
                             // Handle Load click
                         }
                     )
+                }
+            }
+
+            // Debug-only shake button
+            if (BuildConfig.DEBUG) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(24.dp)
+                ) {
+                    IconButton(
+                        onClick = onShake,
+                        colors = IconButtonDefaults.iconButtonColors(
+                            containerColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.7f),
+                            contentColor = MaterialTheme.colorScheme.onTertiary
+                        )
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = "Shake (debug)"
+                        )
+                    }
                 }
             }
 

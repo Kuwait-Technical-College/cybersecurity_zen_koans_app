@@ -36,7 +36,7 @@ object ShareUtil {
 
             // Create and start a share intent
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "image/png"
+                type = "image/jpeg"
                 putExtra(Intent.EXTRA_STREAM, contentUri)
                 putExtra(Intent.EXTRA_SUBJECT, "Cybersecurity Zen Koan #${koanWithExplanation?.uniqueCode}")
                 putExtra(Intent.EXTRA_TEXT, "CSZK: #${koanWithExplanation?.uniqueCode}")

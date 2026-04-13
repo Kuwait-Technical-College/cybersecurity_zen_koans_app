@@ -72,7 +72,8 @@ fun KoanCard(
                 text = koanWithExplanation.technicalExplanation,
                 style = MaterialTheme.typography.bodyMedium,
                 color = cardContent.copy(alpha = 0.85f),
-                textAlign = TextAlign.Justify
+                textAlign = TextAlign.Start,
+                modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(16.dp))

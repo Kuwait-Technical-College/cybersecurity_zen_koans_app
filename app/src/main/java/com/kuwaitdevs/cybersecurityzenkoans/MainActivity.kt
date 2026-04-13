@@ -64,6 +64,13 @@ class MainActivity : ComponentActivity(), SensorEventListener {
                         koanWithExplanation = koanWithExplanation,
                         showAnimation = showAnimation,
                         showShakeMessage = showShakeMessage,
+                        onShake = {
+                            koanViewModel.refreshKoan()
+                            koanViewModel.hideShakeMessage()
+                            Handler(mainLooper).postDelayed({
+                                koanViewModel.resetAnimation()
+                            }, 500)
+                        }
                     )
 //                    LaunchedEffect( koanWithExplanation) {
 //                        koanViewModel.refreshKoan()
