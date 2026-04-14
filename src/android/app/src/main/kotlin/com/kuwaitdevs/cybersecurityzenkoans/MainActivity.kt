@@ -1,4 +1,4 @@
-package com.kuwaitdevs.cybersecurity_zen_koans
+package com.kuwaitdevs.cybersecurityzenkoans
 
 import io.flutter.embedding.android.FlutterActivity
 
