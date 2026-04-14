@@ -7,7 +7,7 @@ Thank you for your interest in contributing! We welcome all kinds of contributio
 If you're a developer and want to help improve the app:
 
 1. Fork the repo and clone it locally.
-2. Set up the development environment (see [README](./README.md)).
+2. Set up the development environment (see [README](./README.md)). The Flutter project is in the `src/` directory.
 3. Check out open issues labeled `feature`, `bug`, or `enhancement`.
 4. Create a branch, make your changes, and submit a pull request.
 
@@ -20,17 +20,18 @@ Want to improve the Zen experience? You can:
 - Add new koans (koan text and the technical explanation of the koan)
 - Fix typos or update existing koans
 
-Koans are stored in [KoansRepository.kt](./app/src/main/java/com/kuwaitdevs/cybersecurityzenkoans/data/KoansRepository.kt) for now. We are planning to move it into a dedicated server where you can add koans for others to read and ponder:
+Koans are stored in [koans.json](./src/assets/koans.json). To add a new koan:
 
-1. Go to the end of the list in [KoansRepository.kt](./app/src/main/java/com/kuwaitdevs/cybersecurityzenkoans/data/KoansRepository.kt)
-2. Add a new element to the list with the following format:
-   ```kt
-        KoanWithExplanation(
-            "Koan",
-            "Explanation",
-            "# 6 digit Alphanumeric ID"
-        )
+1. Open [koans.json](./src/assets/koans.json)
+2. Add a new entry at the end of the array with the following format:
+   ```json
+   {
+     "koan": "Your koan text here",
+     "technicalExplanation": "The technical cybersecurity explanation",
+     "uniqueCode": "A6B2C3"
+   }
    ```
+   Use a unique 6-character alphanumeric code that doesn't already exist in the file.
 3. Submit a pull request.
 
 ## 🙏 General Guidelines
