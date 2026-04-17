@@ -1,6 +1,8 @@
 # Contributing to Cybersecurity Zen Koans App
 
-Thank you for your interest in contributing! We welcome all kinds of contributions, from app development to curating Zen koans.
+Thank you for your interest in contributing! This app was created by **KTECH Students** and we welcome all kinds of contributions, from app development to curating Zen koans.
+
+To get started with open source contributions, check out the [KTECH Contribute to Open Source](https://github.com/Kuwait-Technical-College/contribute_to_open_source) guide.
 
 ## 🚀 Option 1: Contribute to App Features
 
@@ -11,7 +13,7 @@ If you're a developer and want to help improve the app:
 3. Check out open issues labeled `feature`, `bug`, or `enhancement`.
 4. Create a branch, make your changes, and submit a pull request.
 
-Please follow our [coding guidelines](#coding-guidelines) and write meaningful commit messages.
+Please write meaningful commit messages and keep changes focused.
 
 ## 🧘 Option 2: Add or Update Zen Koans
 
@@ -26,7 +28,7 @@ Koans are stored in [koans.json](./src/assets/koans.json). To add a new koan:
 2. Add a new entry at the end of the array with the following format:
    ```json
    {
-     "koan": "Your koan text here",
+     "koanText": "Your koan text here",
      "technicalExplanation": "The technical cybersecurity explanation",
      "uniqueCode": "A6B2C3"
    }
@@ -42,6 +44,6 @@ Koans are stored in [koans.json](./src/assets/koans.json). To add a new koan:
 
 ## 📬 Need Help?
 
-Open an issue or reach out via [hello@kuwaitdevs.com].
+Open an issue or reach out via GitHub Discussions.
 
 Happy hacking and zen-writing!

@@ -2,6 +2,8 @@
 
 **Cybersecurity Zen Koans** is an open-source cross-platform mobile app built with [Flutter](https://flutter.dev). It blends ancient Zen wisdom with modern cybersecurity principles in the form of short, thought-provoking koans. The app is designed to encourage mindfulness while deepening awareness of secure digital practices.
 
+> Created by **ktech Students** 🎓
+
 ---
 
 ## ✨ Features

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:share_plus/share_plus.dart';
@@ -11,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../data/koan_model.dart';
 import '../data/koans_repository.dart';
+import 'widgets/contributors_screen.dart';
 import 'widgets/koan_card.dart';
 import 'widgets/koan_fab.dart';
 
@@ -118,32 +120,58 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
   void _showAboutDialog() {
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(
-          'Cybersecurity Zen Koan',
-          style: TextStyle(color: Theme.of(ctx).colorScheme.primary),
-        ),
-        content: const Text(
-          'Version: 3.0',
-          textAlign: TextAlign.center,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Close'),
+      builder: (ctx) {
+        final brightness = Theme.of(ctx).brightness;
+        final logoAsset = brightness == Brightness.dark
+            ? 'assets/ktech_logo_dark.svg'
+            : 'assets/ktech_logo_light.svg';
+
+        return AlertDialog(
+          title: Text(
+            'Cybersecurity Zen Koan',
+            style: TextStyle(color: Theme.of(ctx).colorScheme.primary),
           ),
-          ElevatedButton(
-            onPressed: () {
-              launchUrl(
-                Uri.parse(
-                    'https://github.com/kuwaitdevs/cybersecurity_zen_koans_app'),
-                mode: LaunchMode.externalApplication,
-              );
-            },
-            child: const Text('Source Code'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Version: 3.1',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              SvgPicture.asset(
+                logoAsset,
+                height: 48,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Created by ktech Students',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Theme.of(ctx).colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Close'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                launchUrl(
+                  Uri.parse(
+                      'https://github.com/Kuwait-Technical-College/contribute_to_open_source'),
+                  mode: LaunchMode.externalApplication,
+                );
+              },
+              child: const Text('Get Started'),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -220,6 +248,14 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
                   child: KoanFab(
                     onShareClick: _shareKoan,
                     onAboutClick: _showAboutDialog,
+                    onContributorsClick: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ContributorsScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               // Debug refresh button

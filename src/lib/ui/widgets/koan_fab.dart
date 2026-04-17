@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class KoanFab extends StatelessWidget {
   final VoidCallback onShareClick;
   final VoidCallback onAboutClick;
+  final VoidCallback onContributorsClick;
 
   const KoanFab({
     super.key,
     required this.onShareClick,
     required this.onAboutClick,
+    required this.onContributorsClick,
   });
 
   @override
@@ -26,6 +28,14 @@ class KoanFab extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(ctx);
                     onShareClick();
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.people_outline),
+                  title: const Text('Contributors'),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    onContributorsClick();
                   },
                 ),
                 ListTile(
