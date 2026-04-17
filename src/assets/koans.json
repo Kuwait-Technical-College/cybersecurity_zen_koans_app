@@ -1083,5 +1083,10 @@
     "koanText": "In cybersecurity, the student who becomes the master never stops being the student.",
     "technicalExplanation": "The cybersecurity field evolves so rapidly that expertise has a short half-life. Techniques, tools, and threats from even two years ago may be obsolete. True mastery requires continuous learning through hands-on practice, community engagement, and a beginner's mind that remains open to new approaches—knowing that the landscape always holds surprises for those who stop learning.",
     "uniqueCode": "Q1PFVW"
+  },
+  {
+    "koanText": "The phishing lure appears as a trusted message, but hides the hook of deception.",
+    "technicalExplanation": "Phishing attacks exploit human psychology by crafting messages that appear legitimate, often using social engineering techniques to create urgency or fear. These attacks bypass technical controls by targeting the human element—the weakest link in security. Effective defenses combine user education, email filtering, multi-factor authentication, and behavioral analysis to detect and prevent these sophisticated social engineering attempts.",
+    "uniqueCode": "PH1SHG"
   }
 ]
