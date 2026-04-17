@@ -104,13 +104,17 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
       if (image == null) return;
 
       final dir = await getTemporaryDirectory();
-      final file = File('${dir.path}/cybersecurity_zen_koan.jpg');
+      final file = File('${dir.path}/cybersecurity_zen_koan.png');
       await file.writeAsBytes(image);
+
+      final box = context.findRenderObject() as RenderBox?;
 
       await Share.shareXFiles(
         [XFile(file.path, mimeType: 'image/png')],
         text: 'CSZK: #${_currentKoan!.uniqueCode}',
         subject: 'Cybersecurity Zen Koan #${_currentKoan!.uniqueCode}',
+        sharePositionOrigin:
+            box != null ? box.localToGlobal(Offset.zero) & box.size : null,
       );
     } catch (e) {
       debugPrint('Error sharing koan: $e');
@@ -172,6 +176,65 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
           ],
         );
       },
+    );
+  }
+
+  void _showLookupDialog() {
+    final controller = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          'Lookup Koan',
+          style: TextStyle(color: Theme.of(ctx).colorScheme.primary),
+        ),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          textCapitalization: TextCapitalization.characters,
+          decoration: const InputDecoration(
+            hintText: 'Enter koan code (e.g. 7H93FT)',
+            border: OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final code = controller.text.trim().toUpperCase();
+              if (code.isEmpty) return;
+
+              final koan = _repository.getKoanByCode(code);
+              Navigator.pop(ctx);
+
+              if (koan != null) {
+                setState(() {
+                  _showCard = false;
+                });
+                Future.delayed(const Duration(milliseconds: 100), () {
+                  if (!mounted) return;
+                  setState(() {
+                    _currentKoan = koan;
+                    _showCard = true;
+                    _showShakeMessage = false;
+                  });
+                });
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('No koan found with code "$code"'),
+                  ),
+                );
+              }
+            },
+            child: const Text('Find'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -256,6 +319,7 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
                         ),
                       );
                     },
+                    onLookupClick: _showLookupDialog,
                   ),
                 ),
               // Debug refresh button

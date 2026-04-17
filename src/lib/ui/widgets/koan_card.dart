@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../data/koan_model.dart';
 import '../theme/colors.dart';
@@ -59,12 +60,23 @@ class KoanCard extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             // Unique code
-            Text(
-              '#${koan.uniqueCode}',
-              style: const TextStyle(
-                fontSize: 12,
-                color: zenGold,
-                fontWeight: FontWeight.w500,
+            GestureDetector(
+              onTap: () {
+                Clipboard.setData(ClipboardData(text: koan.uniqueCode));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Code "${koan.uniqueCode}" copied'),
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              },
+              child: Text(
+                '#${koan.uniqueCode}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: zenGold,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],

@@ -4,12 +4,14 @@ class KoanFab extends StatelessWidget {
   final VoidCallback onShareClick;
   final VoidCallback onAboutClick;
   final VoidCallback onContributorsClick;
+  final VoidCallback onLookupClick;
 
   const KoanFab({
     super.key,
     required this.onShareClick,
     required this.onAboutClick,
     required this.onContributorsClick,
+    required this.onLookupClick,
   });
 
   @override
@@ -28,6 +30,14 @@ class KoanFab extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(ctx);
                     onShareClick();
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.search),
+                  title: const Text('Lookup Koan'),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    onLookupClick();
                   },
                 ),
                 ListTile(
