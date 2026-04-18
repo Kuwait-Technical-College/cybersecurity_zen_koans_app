@@ -1,8 +1,22 @@
 # Cybersecurity Zen Koans 🧘‍♂️🔐
 
+<p align="center">
+  <img src="screenshots/zen_koan_logo.png" alt="Cybersecurity Zen Koans Logo" width="200">
+</p>
+
 **Cybersecurity Zen Koans** is an open-source cross-platform mobile app built with [Flutter](https://flutter.dev). It blends ancient Zen wisdom with modern cybersecurity principles in the form of short, thought-provoking koans. The app is designed to encourage mindfulness while deepening awareness of secure digital practices.
 
 > Created by **ktech Students** 🎓
+
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <img src="screenshots/screenshot_1.jpeg" alt="Screenshot 1" width="250">
+  <img src="screenshots/screenshot_2.jpeg" alt="Screenshot 2" width="250">
+  <img src="screenshots/screenshot_3.jpeg" alt="Screenshot 3" width="250">
+</p>
 
 ---
 
