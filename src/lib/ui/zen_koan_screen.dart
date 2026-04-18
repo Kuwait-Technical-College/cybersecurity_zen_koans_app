@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -10,9 +10,12 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../data/favorites_repository.dart';
 import '../data/koan_model.dart';
 import '../data/koans_repository.dart';
+import '../data/notification_service.dart';
 import 'widgets/contributors_screen.dart';
+import 'widgets/favorites_screen.dart';
 import 'widgets/koan_card.dart';
 import 'widgets/koan_fab.dart';
 
@@ -26,9 +29,11 @@ class ZenKoanScreen extends StatefulWidget {
 class _ZenKoanScreenState extends State<ZenKoanScreen>
     with SingleTickerProviderStateMixin {
   final KoansRepository _repository = KoansRepository();
+  final FavoritesRepository _favoritesRepository = FavoritesRepository();
   final ScreenshotController _screenshotController = ScreenshotController();
 
   KoanWithExplanation? _currentKoan;
+  Set<String> _favoriteCodes = {};
   bool _isLoading = true;
   bool _showShakeMessage = true;
   bool _showCard = false;
@@ -50,8 +55,22 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
 
   Future<void> _initRepository() async {
     await _repository.load();
+    _favoriteCodes = await _favoritesRepository.loadFavorites();
     _refreshKoan();
     setState(() => _isLoading = false);
+    if (!kIsWeb) {
+      await NotificationService.requestPermissions();
+      final dailyKoan = _repository.getRandomKoan();
+      await NotificationService.scheduleDailyKoan(
+        koanText: dailyKoan.koanText,
+        koanCode: dailyKoan.uniqueCode,
+      );
+    }
+  }
+
+  Future<void> _toggleFavorite(String code) async {
+    final updated = await _favoritesRepository.toggleFavorite(code);
+    setState(() => _favoriteCodes = updated);
   }
 
   void _initShakeDetection() {
@@ -107,6 +126,7 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
       final file = File('${dir.path}/cybersecurity_zen_koan.png');
       await file.writeAsBytes(image);
 
+      if (!mounted) return;
       final box = context.findRenderObject() as RenderBox?;
 
       await Share.shareXFiles(
@@ -283,7 +303,13 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
                         child: _currentKoan != null
                             ? Screenshot(
                                 controller: _screenshotController,
-                                child: KoanCard(koan: _currentKoan!),
+                                child: KoanCard(
+                                  koan: _currentKoan!,
+                                  isFavorited: _favoriteCodes
+                                      .contains(_currentKoan!.uniqueCode),
+                                  onFavoriteToggle: () =>
+                                      _toggleFavorite(_currentKoan!.uniqueCode),
+                                ),
                               )
                             : const SizedBox.shrink(),
                       ),
@@ -291,7 +317,9 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
                         Padding(
                           padding: const EdgeInsets.only(top: 24),
                           child: Text(
-                            'Shake your device for a new koan',
+                            kIsWeb
+                                ? 'Click the button to get a new koan'
+                                : 'Shake your device for a new koan',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: colorScheme.primary,
@@ -311,6 +339,17 @@ class _ZenKoanScreenState extends State<ZenKoanScreen>
                   child: KoanFab(
                     onShareClick: _shareKoan,
                     onAboutClick: _showAboutDialog,
+                    onFavoritesClick: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => FavoritesScreen(
+                            koansRepository: _repository,
+                            favoritesRepository: _favoritesRepository,
+                          ),
+                        ),
+                      );
+                    },
                     onContributorsClick: () {
                       Navigator.push(
                         context,

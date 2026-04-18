@@ -1089,4 +1089,30 @@
     "technicalExplanation": "Phishing attacks exploit human psychology by crafting messages that appear legitimate, often using social engineering techniques to create urgency or fear. These attacks bypass technical controls by targeting the human element—the weakest link in security. Effective defenses combine user education, email filtering, multi-factor authentication, and behavioral analysis to detect and prevent these sophisticated social engineering attempts.",
     "uniqueCode": "PH1SHG"
   }
+ ,
+  {
+    "koanText": "The AI that defends you today may be deceived into attacking you tomorrow.",
+    "technicalExplanation": "AI-powered security tools—anomaly detectors, spam filters, and behavioral analytics—can themselves become attack targets. Adversarial machine learning techniques allow attackers to craft inputs that fool AI models: adversarial examples bypass image-based detection, prompt injection manipulates LLM-based security tools, and model poisoning corrupts training data to create blind spots. The same intelligence defending a system can be weaponized against it.",
+    "uniqueCode": "CAT1ML"
+  },
+  {
+    "koanText": "The DNS query whispered in silence reveals the secrets of the loudest encrypted traffic.",
+    "technicalExplanation": "DNS is often overlooked as a security channel, yet it exposes significant intelligence even when all other traffic is encrypted. Every domain lookup reveals what services a user accesses, what time they access them, and behavioral patterns. Attackers exploit this through DNS tunneling—encoding stolen data inside DNS queries to exfiltrate it past firewalls. DNS over HTTPS (DoH) and DNS monitoring are essential but often missing controls.",
+    "uniqueCode": "DNSCAT"
+  },
+  {
+    "koanText": "The open-source library you trust was written by a stranger you have never met.",
+    "technicalExplanation": "Modern applications average hundreds of open-source dependencies, most written by anonymous contributors with no security vetting. Attackers exploit this trust through typosquatting (publishing packages with names similar to popular ones), dependency confusion (injecting malicious packages into internal build pipelines), and maintainer account takeover. Software Bills of Materials (SBOMs) and dependency scanning help organizations understand and monitor what they are actually running.",
+    "uniqueCode": "CATPK9"
+  },
+  {
+    "koanText": "Your fingerprint cannot be changed once stolen; choose where you leave it wisely.",
+    "technicalExplanation": "Biometric authentication—fingerprints, facial recognition, iris scans—offers strong usability but carries a unique risk: unlike passwords, compromised biometric data cannot be rotated or revoked. A leaked password database can be mitigated by resetting credentials; a leaked fingerprint database is a permanent liability. Biometric data should never be stored as raw templates, and systems should implement liveness detection to counter spoofing attacks.",
+    "uniqueCode": "BMCAT4"
+  },
+  {
+    "koanText": "The code deployed in haste repents in breaches at leisure.",
+    "technicalExplanation": "Pressure to ship fast is one of the most reliable predictors of security vulnerabilities. Rushed deployments skip threat modeling, abbreviate code review, bypass staging environments, and push misconfigured infrastructure to production. CI/CD pipelines with mandatory security gates—SAST, DAST, secret scanning, and dependency checks—enforce a minimum security bar regardless of deadline pressure, making speed and security compatible rather than competing goals.",
+    "uniqueCode": "CDCAT2"
+  }
 ]

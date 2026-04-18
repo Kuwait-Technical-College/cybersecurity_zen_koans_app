@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 class KoanFab extends StatelessWidget {
   final VoidCallback onShareClick;
   final VoidCallback onAboutClick;
   final VoidCallback onContributorsClick;
   final VoidCallback onLookupClick;
+  final VoidCallback onFavoritesClick;
 
   const KoanFab({
     super.key,
@@ -12,6 +13,7 @@ class KoanFab extends StatelessWidget {
     required this.onAboutClick,
     required this.onContributorsClick,
     required this.onLookupClick,
+    required this.onFavoritesClick,
   });
 
   @override
@@ -30,6 +32,14 @@ class KoanFab extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(ctx);
                     onShareClick();
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.favorite_border),
+                  title: const Text('Favorites'),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    onFavoritesClick();
                   },
                 ),
                 ListTile(

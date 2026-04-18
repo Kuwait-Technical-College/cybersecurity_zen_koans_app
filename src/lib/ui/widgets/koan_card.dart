@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../data/koan_model.dart';
@@ -6,8 +6,15 @@ import '../theme/colors.dart';
 
 class KoanCard extends StatelessWidget {
   final KoanWithExplanation koan;
+  final bool isFavorited;
+  final VoidCallback? onFavoriteToggle;
 
-  const KoanCard({super.key, required this.koan});
+  const KoanCard({
+    super.key,
+    required this.koan,
+    this.isFavorited = false,
+    this.onFavoriteToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +66,20 @@ class KoanCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
+            // Favorite button
+            IconButton(
+              icon: Icon(
+                isFavorited ? Icons.favorite : Icons.favorite_border,
+                color: isFavorited
+                    ? Colors.redAccent
+                    : cardContent.withValues(alpha: 0.4),
+                size: 22,
+              ),
+              tooltip:
+                  isFavorited ? 'Remove from favorites' : 'Add to favorites',
+              onPressed: onFavoriteToggle,
+            ),
+            const SizedBox(height: 4),
             // Unique code
             GestureDetector(
               onTap: () {

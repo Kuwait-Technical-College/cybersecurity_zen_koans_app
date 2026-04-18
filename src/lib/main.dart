@@ -1,9 +1,12 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
+import 'data/notification_service.dart';
 import 'ui/theme/theme.dart';
 import 'ui/zen_koan_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initialize();
   runApp(const CybersecurityZenKoansApp());
 }
 
