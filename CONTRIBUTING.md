@@ -1,8 +1,8 @@
 # Contributing to Cybersecurity Zen Koans App
 
-Thank you for your interest in contributing! This app was created by **KTECH Students** and we welcome all kinds of contributions, from app development to curating Zen koans.
+Thank you for your interest in contributing! This app was created by **ktech Students** and we welcome all kinds of contributions, from app development to curating Zen koans.
 
-To get started with open source contributions, check out the [KTECH Contribute to Open Source](https://github.com/Kuwait-Technical-College/contribute_to_open_source) guide.
+To get started with open source contributions, check out the [ktech Contribute to Open Source](https://github.com/Kuwait-Technical-College/contribute_to_open_source) guide.
 
 ## 🚀 Option 1: Contribute to App Features
 
